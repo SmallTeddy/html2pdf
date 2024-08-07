@@ -1,11 +1,18 @@
 {
   "name": "@smallteddy/html2pdf",
-  "version": "1.0.0",
+  "private": false,
+  "version": "1.0.4",
   "description": "A JS tool for generating PDFs from HTML",
+  "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "vite build",
+    "publish": "npm publish --access public"
   },
+  "files": [
+    "index.js",
+    "src"
+  ],
   "author": "SmallTeddy",
   "keywords": [
     "html2pdf",
@@ -19,5 +26,12 @@
     "pdf",
     "js"
   ],
-  "license": "ISC"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SmallTeddy/html2pdf.git"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "license": "MIT"
 }

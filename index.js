@@ -1,1 +1,2 @@
-eval(function(p,a,c,k,e,r){e=function(c){return c.toString(36)};if('0'.replace(0,e)==0){while(c--)r[e(c)]=k[c];k=[function(e){return r[e]||e}];e=function(){return'[3-9a-h]'};c=1};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p}('9 5 a"./5.b";9 c a"./jspdf.b";export function htmlToPdf(d,e){6 f={dpi:192,scale:2,backgroundColor:"#F1F6FE"};5(d,f).then((3)=>{g 7=3.width;g 8=3.height;6 4=new c(\'1\',\'pt\',[7,8]);6 h=3.toDataURL(\'image/jpeg\',1.0);4.addImage(h,\'JPEG\',0,0,7,8);4.save(e+".4")})}',[],18,'|||canvas|pdf|html2canvas|const|contentWidth|contentHeight|import|from|js|jsPDF|downloadDom|downloadName|options|var|pageData'.split('|'),0,{}))
+export { html2Pdf }
+from './src/html2ToPdf/index.js';
