@@ -1,0 +1,23 @@
+{
+  "name": "@smallteddy/html2pdf",
+  "version": "1.0.0",
+  "description": "A JS tool for generating PDFs from HTML",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "SmallTeddy",
+  "keywords": [
+    "html2pdf",
+    "html2pdf.js",
+    "html2canvas",
+    "jspdf",
+    "pdf.js",
+    "pdf",
+    "html",
+    "tool",
+    "pdf",
+    "js"
+  ],
+  "license": "ISC"
+}
