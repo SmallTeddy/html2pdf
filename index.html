@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>html2pdf</title>
+  <!-- 引入 ECharts 库 -->
+  <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+
+  <style>
+    .downloadPdf {
+      width: 40%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    .btn {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="downloadPdf" class="downloadPdf" contenteditable>
+    <p>内容可编辑</p>
+    <p>内容可编辑</p>
+    <p>内容可编辑</p>
+    <p>内容可编辑</p>
+    <!-- 创建一个用于显示饼图的 div 容器，设置宽度为 600 像素，高度为 400 像素 -->
+    <div id="pieChart" style="width: 600px;height:400px;"></div>
+  </div>
+  <button class="btn" onclick="htmlToPdf()">生成pdf</button>
+  <script>
+    // 初始化 ECharts 实例，并将其绑定到上述 div 容器
+    const pieChart = echarts.init(document.getElementById('pieChart'));
+
+    // 定义饼图的配置选项
+    const pieOption = {
+      // 配置图表的标题
+      title: {
+        text: '饼图示例',  // 设置标题文本为“饼图示例”
+        left: 'center'  // 标题位置：居中
+      },
+      // 配置提示框组件，默认配置即可显示数据详细信息
+      tooltip: {
+        trigger: 'item'  // 提示框触发类型：数据项触发
+      },
+      // 配置图例
+      legend: {
+        orient: 'vertical',  // 图例布局方式：垂直
+        left: 'left'  // 图例位置：左侧
+      },
+      // 配置数据系列
+      series: [{
+        name: '访问来源',  // 系列名称为“访问来源”
+        type: 'pie',  // 图表类型为饼图
+        radius: '50%',  // 饼图半径为 50%
+        data: [  // 数据项
+          { value: 1048, name: '搜索引擎' },  // 搜索引擎的访问量
+          { value: 735, name: '直接访问' },  // 直接访问的访问量
+          { value: 580, name: '邮件营销' },  // 邮件营销的访问量
+          { value: 484, name: '联盟广告' },  // 联盟广告的访问量
+          { value: 300, name: '视频广告' }  // 视频广告的访问量
+        ],
+        // 配置高亮样式
+        emphasis: {
+          itemStyle: {
+            shadowBlur: 10,  // 阴影模糊大小
+            shadowOffsetX: 0,  // 阴影水平方向偏移
+            shadowColor: 'rgba(0, 0, 0, 0.5)'  // 阴影颜色
+          }
+        }
+      }]
+    };
+
+    // 使用 setOption 方法将配置项设置给 ECharts 实例，生成图表
+    pieChart.setOption(pieOption);
+
+    function htmlToPdf() {
+      // 获取HTML元素
+      const element = document.getElementById("downloadPdf");
+      const options = {
+        dpi: 192,  //dpi属性的值为192，表示图像的分辨率
+        scale: 2, //scale属性的值为2，表示图像的缩放比例。
+        backgroundColor: "#F1F6FE"  //backgroundColor属性的值为"#F1F6FE"，表示图像的背景颜色。
+      };
+      // 将元素转换为canvas对象
+      html2canvas(element, options).then((canvas) => {
+        var contentWidth = canvas.width;   //获取Canvas(上面元素id 'layout-wrapper')对象的宽度
+        var contentHeight = canvas.height; //获取Canvas(上面元素id 'layout-wrapper')对象的高度
+        // 创建jsPDF对象	
+        jsPDF = jspdf.jsPDF;  //导入jsPDF库，用于创建PDF文件
+        const pdf = new jsPDF('1', 'pt', [contentWidth, contentHeight]); //创建一个新的PDF对象，参数包括页面格式（'1'表示A4纸张）、单位（'pt'）和页面尺寸（[contentWidth, contentHeight]）
+        var pageData = canvas.toDataURL('image/jpeg', 1.0);  //将Canvas对象转换为JPEG格式的数据，并将其存储在pageData变量中。1.0表示图片质量
+        pdf.addImage(pageData, 'JPEG', 0, 0, contentWidth, contentHeight);  //将JPEG格式的图片添加到PDF文件中，图片的左上角坐标为(0, 0)，宽度为contentWidth，高度为contentHeight
+        pdf.save("test.pdf");
+      });
+    }
+  </script>
+</body>
+
+</html>

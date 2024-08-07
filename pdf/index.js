@@ -1,7 +1,7 @@
-import html2canvas from "./utils/html2canvas.js";
-import jsPDF from "./utils/jspdf.js";
+import html2canvas from "./html2canvas.js";
+import jsPDF from "./jspdf.js";
 
-exports.htmlToPdf = (downloadDom, downloadName) => {
+export function htmlToPdf(downloadDom, downloadName) {
   const options = {
     // dpi属性的值为192，表示图像的分辨率
     dpi: 192,
